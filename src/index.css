@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #020305;
+  --color-volt: #00f0ff;   /* Unified Electric Cyan */
+  --color-cyan: #8be9fd;
+  --color-crimson: #ff2a3c;
+
+  --font-display: "Syne", sans-serif;
+  --font-cyber: "Chakra Petch", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+html {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  cursor: none;
+  background-color: var(--color-void);
+  color: #f4f4f5;
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (pointer: coarse) {
+  body,
+  .interactive,
+  button,
+  a {
+    cursor: auto !important;
+  }
+}
+
+/* Cyberpunk 45-degree Chamfered Cut Corners */
+.clip-chamfer {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 22px) 0,
+    100% 22px,
+    100% 100%,
+    22px 100%,
+    0 calc(100% - 22px)
+  );
+}
+
+.clip-shard {
+  clip-path: polygon(
+    18px 0,
+    100% 0,
+    100% calc(100% - 18px),
+    calc(100% - 18px) 100%,
+    0 100%,
+    0 18px
+  );
+}
+
+.clip-btn {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    0 100%
+  );
+}
+
+.clip-visor-plate {
+  clip-path: polygon(
+    0 14px,
+    14px 0,
+    100% 0,
+    100% calc(100% - 18px),
+    calc(100% - 18px) 100%,
+    0 100%
+  );
+}
+
+/* Subtle Cyberpunk Micro-Grid */
+.cyber-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* Tactile CRT Scanlines & Noise */
+.crt-overlay {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.34) 3px
+  );
+}
+
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Neon Glow Utilities */
+.glow-volt {
+  text-shadow: 0 0 18px rgba(0, 240, 255, 0.45);
+}
+
+.glow-crimson {
+  text-shadow: 0 0 18px rgba(255, 42, 60, 0.55);
+}
+
+/* Animated Scanline Bar */
+@keyframes scan-sweep {
+  0% { transform: translateY(-100%); opacity: 0; }
+  15% { opacity: 0.45; }
+  85% { opacity: 0.45; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.cyber-scan-beam {
+  animation: scan-sweep 7s linear infinite;
+}
+
+/* Brutalist Outline & RGB Glitch */
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85);
+}
+
+.glitch-hover:hover {
+  animation: rgb-glitch 0.25s steps(2, end) infinite;
+}
+
+@keyframes rgb-glitch {
+  0% {
+    text-shadow: 4px 0 var(--color-crimson), -4px 0 var(--color-cyan);
+    transform: translate(0);
+  }
+  50% {
+    text-shadow: -4px 2px var(--color-crimson), 4px -2px var(--color-cyan);
+    transform: translate(-2px, 1px);
+  }
+  100% {
+    text-shadow: 2px -2px var(--color-crimson), -2px 2px var(--color-cyan);
+    transform: translate(2px, -1px);
+  }
+}
+
+.hud-cursor.is-hovering .cursor-ring {
+  width: 52px;
+  height: 52px;
+  border-color: var(--color-crimson);
+  transform: translate(-50%, -50%) rotate(0deg);
+}
